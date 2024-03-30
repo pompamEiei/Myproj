@@ -1,0 +1,30 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Data;
+using System.Text;
+using iBonded.App.AccessDB;
+
+namespace iBonded.App.Class
+{
+    public class testM
+    {
+
+        DataTable dt = new DataTable();
+        public DataTable GetBalance(test t)
+        {
+
+            StringBuilder StrSql = new StringBuilder();
+            StrSql.AppendFormat(" SELECT * FROM PBBN1D.MCM010P ");
+            StrSql.AppendFormat(" WHERE C1CORP='{0}' AND C1DTYY='{1}' ", t, t);
+            StrSql.AppendFormat(" AND C1DTMM='{0}' AND C1MTCD = '{1}'", t.C1DTMM, t.C1MTCD);
+            dt = AccessDB.AccessDB.getDataTable("A39BP", StrSql.ToString());
+
+            return dt.Rows.Count > 0 ? dt : null;
+
+        }
+
+
+    }
+}
